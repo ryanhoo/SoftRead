@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_news_item_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_news_item_padding" >
+
+        <ImageView
+            android:id="@+id/imageViewPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/placeholder" />
+
+        <TextView
+            android:id="@+id/textViewNewsEN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_margin_between_text"
+            android:layout_marginTop="@dimen/dimen_margin_between_image_and_text"
+            android:text="@string/str_news_sample_en" />
+
+        <TextView
+            android:id="@+id/textViewNewsZN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_margin_between_image_and_text"
+            android:text="@string/str_news_sample_zn" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textViewTagLabel"
+                style="@style/ListItemIcon"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/tag" />
+
+            <TextView
+                android:id="@+id/textViewTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/textViewTagLabel"
+                android:gravity="center_vertical"
+                android:text="@string/str_news_tags" />
+
+            <TextView
+                android:id="@+id/textViewLikeIt"
+                style="@style/ListItemIcon"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/textViewTags"
+                android:background="@drawable/like" />
+
+            <TextView
+                android:id="@+id/textViewCreationDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/str_news_creation_date" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

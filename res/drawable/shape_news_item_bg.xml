@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <corners
+        android:bottomLeftRadius="@dimen/dimen_news_item_bg_corner"
+        android:bottomRightRadius="0dp"
+        android:topLeftRadius="@dimen/dimen_news_item_bg_corner"
+        android:topRightRadius="0dp" />
+
+    <solid android:color="@color/color_news_item_bg" />
+
+</shape>

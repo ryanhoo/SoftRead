@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- listview item -->
+    <dimen name="dimen_news_item_bg_corner">20dp</dimen>
+    <dimen name="dimen_news_item_padding">15dp</dimen>
+    <dimen name="dimen_margin_between_image_and_text">10dp</dimen>
+    <dimen name="dimen_margin_between_text">5dp</dimen>
+    
+    <!-- listview -->
+    <dimen name="dimen_header_footer_view_height">15dp</dimen>
+    <dimen name="dimen_list_to_border">10dp</dimen>
+    
+</resources>

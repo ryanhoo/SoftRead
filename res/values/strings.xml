@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">Soft-Read</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- for test -->
+    <string name="str_news_sample_en">All bubbles eventually have the air let out of them, sometimes with disastrous results.</string>
+    <string name="str_news_sample_zn">所有的泡沫最终会破灭，有时候会伴随着灾难性的后果。</string>
+    <string name="str_news_creation_date">17:53 11月19日 2012</string>
+    <string name="str_news_tags">励志, 生活</string>
+    
+</resources>
