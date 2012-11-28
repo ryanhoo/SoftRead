@@ -1,7 +1,10 @@
 package com.iedgeco.ryan.softread.cache;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.http.HttpResponse;
 
@@ -21,16 +24,17 @@ public class AsyncImageLoader {
 	private static final String TAG = "AsyncImageLoader";
 	private static AsyncImageLoader imageLoader;
 	
-	private Context context;
+	//caches
+	private MemoryCache memoryCache;
+	private FileCache fileCache;
 	
 	class AsyncImageDownloader extends AsyncTask<Void, Void, Bitmap>{
-		
 		private ImageView imageView;
-		private String url;
+		private String fileName;
 		
-		public AsyncImageDownloader(ImageView imageView, String url){
+		public AsyncImageDownloader(ImageView imageView, String fileName){
 			this.imageView = imageView;
-			this.url = url;
+			this.fileName = fileName;
 		}
 		
 		@Override
@@ -41,6 +45,7 @@ public class AsyncImageLoader {
 
 		@Override
 		protected Bitmap doInBackground(Void... arg0) {
+			String url = Utils.getRealUrlOfPicture(fileName);
 			HttpResponse response = new HttpRetriever().requestGet(url, null);
 			Log.i(TAG, "url: " + url);
 			Log.i(TAG, "respone: " + response);
@@ -66,13 +71,16 @@ public class AsyncImageLoader {
 			if(result != null && imageView != null)
 				imageView.setImageBitmap(result);
 			
+			//TODO cache the bitmap both in sdcard & memory
+			memoryCache.put(fileName, result);// key is a unique token, value is the bitmap
+			
+			fileCache.put(fileName, result);
 		}
-		
-		
 	}
 	
 	private AsyncImageLoader(Context context){
-		this.context = context;
+		this.memoryCache 		= 	new MemoryCache();
+		this.fileCache			= 	new FileCache(context);
 	}
 	
 	public static AsyncImageLoader getInstance(Context context){
@@ -82,7 +90,39 @@ public class AsyncImageLoader {
 		return imageLoader;
 	}
 
-	public void displayImageBitmap(ImageView imageView, String picFile){
-		new AsyncImageDownloader(imageView, Utils.getRealUrlOfPicture(picFile)).execute();
+	public void displayImageBitmap(ImageView imageView, String fileName){
+		//TODO to be optimized
+		new AsyncImageDownloader(imageView, fileName).execute();
+	}
+	
+	public void displayBitmap(ImageView imageView, String fileName){
+		//no pic for this item
+		if(fileName == null || "".equals(fileName))
+			return;
+		
+		Bitmap bitmap = getBitmap(fileName);
+		//search in cache, if there is no such bitmap, launch downloads
+		if(bitmap != null){
+			imageView.setImageBitmap(bitmap);
+		}
+		else{
+			Log.w(TAG, "Can't find the file required.");
+			new AsyncImageDownloader(imageView, fileName).execute();
+		}
+	}
+	
+	public Bitmap getBitmap(String key){
+		Bitmap bitmap = null;
+		//1. search memory
+		bitmap = memoryCache.get(key);
+		
+		//2. search sdcard
+		if(bitmap == null){
+			File file = fileCache.getFile(key);
+			if(file != null)
+				bitmap = BitmapHelper.decodeFile(file, null);
+		}
+		
+		return bitmap;
 	}
 }

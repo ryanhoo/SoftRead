@@ -91,8 +91,12 @@ public class MainActivity extends Activity {
             //set data
             SoftNews news = newsList.get(position);
             if(news != null){
-            	if(notEmpty(news.getPicture()))
-            		imageLoader.displayImageBitmap(holder.imageViewPic, news.getPicture());
+            	if(notEmpty(news.getPicture())){
+            		holder.imageViewPic.setVisibility(View.VISIBLE);
+            		imageLoader.displayBitmap(holder.imageViewPic, news.getPicture());
+            	}
+            	else
+            		holder.imageViewPic.setVisibility(View.GONE);
             	if(notEmpty(news.getNews_en()))
             		holder.textViewNewsEN.setText(news.getNews_en());
             	if(notEmpty(news.getNews_zn()))
