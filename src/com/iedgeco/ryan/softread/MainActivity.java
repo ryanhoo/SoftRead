@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,7 +30,7 @@ public class MainActivity extends Activity {
 
 	private static final String TAG = "MainActivity";
 	
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 	
 	private static String url = Config.SERVER_URL + Config.REQUEST_UPDATE;
 	
@@ -133,6 +134,26 @@ public class MainActivity extends Activity {
 		newsAdapter.notifyDataSetChanged();
 	}
     
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_clear_cache:
+			imageLoader.clearCache();
+			break;
+
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+    
+    /** Activity life cycle */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,10 +176,4 @@ public class MainActivity extends Activity {
 		}
     }
 
-
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
 }

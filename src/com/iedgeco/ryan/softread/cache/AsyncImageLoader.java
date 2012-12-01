@@ -125,4 +125,11 @@ public class AsyncImageLoader {
 		
 		return bitmap;
 	}
+	
+	public void clearCache(){
+		if(memoryCache != null)
+			memoryCache.clear();
+		if(fileCache != null)
+			fileCache.clear();
+	}
 }

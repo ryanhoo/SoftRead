@@ -9,7 +9,11 @@ public interface Config {
 	public static final String TABLE_SOFT_NEWS = "soft_news";
 	public static final String TABLE_ADMIN = "admin";
 
-	public static final String SERVER_URL = "http://219.220.255.169:8080/SoftRead-Server/";
+	//production
+	public static final String SERVER_URL = "http://ad43232761.x9.fjjsp01.com/";
+	
+	//test
+//	public static final String SERVER_URL = "http://219.220.255.169:8080/SoftRead-Server/";
 	
 	public static final String REQUEST_PICTURE = "upload/";
 	public static final String REQUEST_UPDATE = "update/";
